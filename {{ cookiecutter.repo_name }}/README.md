@@ -6,15 +6,15 @@
 ------------
 
 ``` bash
-$(from scratch) make create_environment
-$(from existing) make requirements
+$(for the 1st time ) make create_environment
+$(for subsequential) make requirements
 ```
 
 ### To start working:
 ------------
 
 ``` bash
-$ conda activate {{cookiecutter.project_name}}
+$ source activate {{cookiecutter.project_name}}
 $ conda install your-own-package
 ```
 
