@@ -1,0 +1,25 @@
+{% macro py2dep() -%}
+  - python=2.7
+  - pathlib2
+{% endmacro -%}
+{% macro py3dep() -%}
+  - python=3
+{% endmacro -%}
+name: {{ cookiecutter.repo_name }}
+dependencies:
+  - pip
+  - pip:
+    - -e .
+    - python-dotenv>=0.5.1
+    - awscli
+  - setuptools
+  - wheel
+  - flake8
+  - sphinx
+  - click
+  - coverage
+{% if cookiecutter.python_interpreter == 'python3' -%}
+{{ py3dep()|indent(2, true) }}
+{% else -%}
+{{ py2dep()|indent(2, true) }}
+{% endif -%}
