@@ -5,11 +5,11 @@
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-BUCKET = {{ cookiecutter.s3_bucket }}
-PROFILE = {{ cookiecutter.aws_profile }}
-PROJECT_NAME = {{ cookiecutter.repo_name }}
-PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-VIRTUALENV = {{ cookiecutter.virtualenv }}
+BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
+PROFILE = default
+PROJECT_NAME = hvac-techcon
+PYTHON_INTERPRETER = python3
+VIRTUALENV = conda
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -75,6 +75,15 @@ ifneq (${CONDA_DEFAULT_ENV}, $(PROJECT_NAME))
 endif
 endif
 	$(PYTHON_INTERPRETER) test_environment.py
+
+
+## Save current environment
+export_requirements: test_environment
+ifeq (conda, $(VIRTUALENV))
+	conda env export > environment.yml
+else
+	$(PYTHON_INTERPRETER) -m pip freeze > requirements.txt
+endif
 
 #################################################################################
 # PROJECT RULES                                                                 #
