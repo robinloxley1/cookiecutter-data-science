@@ -5,11 +5,13 @@
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
-PROFILE = default
-PROJECT_NAME = hvac-techcon
-PYTHON_INTERPRETER = python3
-VIRTUALENV = conda
+BUCKET = {{ cookiecutter.s3_bucket }}
+PROFILE = {{ cookiecutter.aws_profile }}
+PROJECT_NAME = {{ cookiecutter.repo_name }}
+MODULE_NAME = {{ cookiecutter.module_name }}
+PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
+VIRTUALENV = {{ cookiecutter.virtualenv }}
+CONDA_EXE ?= {{ cookiecutter.conda_path }}
 
 #################################################################################
 # COMMANDS                                                                      #
